@@ -29,6 +29,10 @@ DOMAIN = os.getenv("DJANGO_DOMAIN")
 if not DOMAIN:
     raise RuntimeError("Environment variable DJANGO_DOMAIN is required")
 
+DJANGO_API_SCHEME = os.getenv("DJANGO_API_SCHEME", "https")
+if not os.environ.get('DJANGO_API_SCHEME'):
+    raise RuntimeError("Environment variable DJANGO_API_SCHEME is required")
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -172,4 +176,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SWAGGER_SETTINGS = {
     'USE_SESSION_AUTH': False,
     'SECURITY_DEFINITIONS': None,
+    "DEFAULT_API_URL": f"{DJANGO_API_SCHEME}://{DOMAIN}",
 }

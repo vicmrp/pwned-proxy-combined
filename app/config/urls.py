@@ -13,7 +13,7 @@ schema_view = get_schema_view(
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),
-    url=f"{'https' if not settings.DEBUG else 'http'}://{settings.DOMAIN}",
+    url=f"{settings.DJANGO_API_SCHEME}://{settings.DOMAIN}",
 )
 
 urlpatterns = [
@@ -23,6 +23,7 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0)),
 
     # Redirect root to /swagger/
+    path('swagger.json', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('', schema_view.with_ui('swagger', cache_timeout=0)),
 ]
 
