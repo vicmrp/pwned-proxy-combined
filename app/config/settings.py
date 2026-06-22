@@ -25,9 +25,8 @@ ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
 if not os.environ.get('DJANGO_ALLOWED_HOSTS'):
     raise RuntimeError("Environment variable DJANGO_ALLOWED_HOSTS is required")
 
-DOMAIN = 'localhost:8000'
-os.environ.get('DJANGO_ALLOWED_HOSTS')
-if not os.environ.get('DJANGO_ALLOWED_HOSTS'):
+DOMAIN = os.getenv("DJANGO_DOMAIN")
+if not DOMAIN:
     raise RuntimeError("Environment variable DJANGO_DOMAIN is required")
 
 # Quick-start development settings - unsuitable for production
